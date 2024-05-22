@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from schemas import Task, TaskCreate, User, UserCreate
-from crud import create_task, get_tasks, get_task, get_users, delete_task, create_user, delete_user
+from crud import create_task, get_tasks, get_task, get_users, delete_task, create_user, delete_user, delete_all_users, delete_all_tasks
 from database import get_db
 import models, schemas
 
@@ -62,3 +62,9 @@ def delete_users(user_id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+@app.delete("/delete_all")
+def delete_all(db: Session = Depends(get_db)):
+    delete_all_users(db)
+    delete_all_tasks(db)
+    return {"message": "All users and tasks have been deleted"}
