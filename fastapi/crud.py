@@ -3,9 +3,10 @@ from models import Task, User
 from schemas import TaskCreate, TaskUpdate, UserCreate
 from utils import get_password_hash
 from fastapi import HTTPException
+import models
 
-def get_user(db: Session, user_id: int):
-    return db.query(User).filter(User.id == user_id).first()
+def get_users(db: Session, skip: int = 0, limit: int = 10):
+    return db.query(User).offset(skip).limit(limit).all()
 
 def get_user_by_username(db: Session, username: str):
     return db.query(User).filter(User.username == username).first()
@@ -52,3 +53,11 @@ def delete_task(db: Session, task_id: int):
         db.delete(db_task)
         db.commit()
     return db_task
+
+def delete_user(db: Session, user_id: int):
+    user = db.query(models.User).filter(models.User.id == user_id).first()
+    if user is None:
+        return None
+    db.delete(user)
+    db.commit()
+    return user
