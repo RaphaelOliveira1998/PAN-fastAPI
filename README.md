@@ -30,7 +30,8 @@ A documentação completa da API, incluindo os modelos de dados e os parâmetros
 
 ## Como executar o projeto
 
-1. Instale as dependências do projeto com o comando `pip install -r requirements.txt`.
-2. Inicie o servidor com o comando `uvicorn main:app --reload`.
+1. Navegue até a pasta 'fastapi'.
+2. Instale as dependências do projeto com o comando `pip install -r requirements.txt`.
+3. Inicie o servidor com o comando `uvicorn main:app --reload`.
 
 Agora você pode fazer requisições para a API no endereço `http://localhost:8000`.
