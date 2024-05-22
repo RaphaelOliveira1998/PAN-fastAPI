@@ -61,3 +61,13 @@ def delete_user(db: Session, user_id: int):
     db.delete(user)
     db.commit()
     return user
+
+def delete_all_users(db: Session):
+    num_deleted = db.query(models.User).delete()
+    db.commit()
+    return num_deleted
+
+def delete_all_tasks(db: Session):
+    num_deleted = db.query(models.Task).delete()
+    db.commit()
+    return num_deleted
